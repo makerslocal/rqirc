@@ -1,0 +1,19 @@
+{
+  "name": "rqmail",
+  "version": "1.0.0",
+  "description": "RedQueen irc module",
+  "main": "index.js",
+  "dependencies": {
+    "irc": "^0.3.12",
+    "logule": "^2.0.1",
+    "minimist": "^1.1.1",
+    "nano": "^6.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js $PWD/config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL"
+}

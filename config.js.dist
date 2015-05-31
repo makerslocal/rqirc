@@ -1,0 +1,22 @@
+module.exports = {
+  rq : {
+    sender : 'rqirc'
+  },
+
+  irc : {
+    server : 'irc.freenode.net',
+    nick   : 'rqirc',
+    channels : [
+                 '##rqtest'
+               ]
+  },
+
+  couch : {
+    url: 'http://localhost',
+    port: 5984,
+    db: 'albums',
+    user: '',
+    pass: ''
+  },
+
+};
