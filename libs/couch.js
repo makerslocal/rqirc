@@ -6,7 +6,7 @@ function Couch(){
         "url"      : config.couch.url,
         "parseUrl" : false
       });
-  var db = couch.db.use('rqmailer');
+  var db = couch.db.use(config.couch.db);
   return db;
 }
 

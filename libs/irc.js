@@ -1,5 +1,5 @@
 var config        = GLOBAL.config;
-var log           = require('logule').init(module, 'email');
+var log           = require('logule').init(module, 'irc');
 var irc           = require('irc');
 
 function Irc(){
