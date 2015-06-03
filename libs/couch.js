@@ -10,7 +10,7 @@ var Couch = function(){
   this.feed = this.db.follow({
     since        : 'now',
     filter       : 'project/by_name',
-    query_params : {name : 'rqirc'}
+    query_params : {name : config.rq.sender}
   });
   this.feed.follow();
 };

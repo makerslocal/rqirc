@@ -23,4 +23,4 @@ couch.feed.on('change', function (change) {
 
 couch.feed.on('error', function(er) {
     log.error(er);
-})
+});
