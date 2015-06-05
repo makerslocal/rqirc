@@ -1,5 +1,5 @@
 {
-  "name": "rqmail",
+  "name": "rqirc",
   "version": "1.0.0",
   "description": "RedQueen irc module",
   "main": "index.js",
