@@ -1,8 +1,16 @@
 var config  = GLOBAL.config;
+var util    = require('util');
 var log     = require('logule').init(module, 'rqirc');
-var couch  = require('./couch.js');
-var irc     = require('./irc.js');
 
+// Setup our couchdb connection
+var Couch   = require('./couch.js');
+var couch   = new Couch(config.couch);
+
+// Setup our irc connection
+var Irc     = require('./irc.js');
+var irc     = new Irc(config.irc);
+
+// Watch couch for a doc changee
 couch.feed.on('change', function (change) {
   log.info("change: %j", change);
   // received doc change, now get doc
@@ -10,17 +18,17 @@ couch.feed.on('change', function (change) {
     if ( err ) { log.error("%j", err); return; }
     log.info("doc id: %s", doc._id);
     log.info("doc: %j", doc);
-    try {
+      // Send all messages to ##rqtest
+      irc.debugSend(doc);
+
       //validateData(doc);
       log.info("Sending irc - [to: %s]",doc.data.channel);
-      irc.client.say(doc.data.channel, irc.colors.wrap('dark_red',doc.data.message));
-    }
-    catch (error) {
-      log.error("%s",error);
-    }
+      irc.send(doc.data.channel, doc.data.message);
   });
 });
 
 couch.feed.on('error', function(er) {
     log.error(er);
 });
+
+couch.feed.follow();
