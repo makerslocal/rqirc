@@ -6,17 +6,24 @@ module.exports = {
   irc : {
     server : 'irc.freenode.net',
     nick   : 'rqirc',
-    channels : [
-                 '##rqtest'
-               ]
+    opts   :
+    {
+      userName : 'rqirc',
+      realName : 'RedQueen irc bot',
+      port     : 6697,
+      secure   : true,
+      channels : [
+                   '##rqtest'
+                 ]
+    }
   },
 
   couch : {
-    url: 'http://localhost',
-    port: 5984,
-    db: 'albums',
-    user: '',
-    pass: ''
+    url    : 'http://localhost',
+    port   : 5984,
+    db     : 'rqprojects',
+    filter : 'rqirc'
+    user   : '',
+    pass   : ''
   },
-
 };
