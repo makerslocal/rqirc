@@ -13,8 +13,8 @@ function Couch(cfg) {
   this.db    = couch.db.use(cfg.db);
 
   this.feed  = this.db.follow({
-    since        : 'now',
-    filter       : 'project/by_name',
-    query_params : {name : cfg.filter}
+    since        : 'now'
+    //filter       : 'project/by_name',
+    //query_params : {name : cfg.filter}
   });
 }

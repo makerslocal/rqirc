@@ -22,8 +22,10 @@ couch.feed.on('change', function (change) {
       irc.debugSend(doc);
 
       //validateData(doc);
-      log.info("Sending irc - [to: %s]",doc.data.channel);
-      irc.send(doc.data.channel, doc.data.message);
+      if ( doc.destination === config.rq.sender ){
+        log.info("Sending irc - [to: %s]",doc.data.channel);
+        irc.send(doc.data.channel, doc.data.message);
+      }
   });
 });
 
