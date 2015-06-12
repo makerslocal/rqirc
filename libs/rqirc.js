@@ -12,7 +12,7 @@ var irc     = new Irc(config.irc);
 
 // Watch couch for a doc changee
 couch.feed.on('change', function (change) {
-  var doc = change.doc
+  var doc = change.doc;
   log.info("change: %j", change);
     // Send all messages to ##rqtest
     irc.debugSend(doc);
@@ -20,7 +20,12 @@ couch.feed.on('change', function (change) {
     //validateData(doc);
     if ( doc.destination === config.rq.sender ){
       log.info("Sending irc - [to: %s]",doc.data.channel);
-      irc.send(doc.data.channel, doc.data.message);
+      if ( doc.data.isaction === true ){
+        irc.sendAction(doc.data.channel, doc.data.message);
+      }
+      else {
+        irc.send(doc.data.channel, doc.data.message);
+      }
     }
 });
 

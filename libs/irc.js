@@ -25,6 +25,17 @@ Irc.prototype.send = function(channel, msg) {
   }
 };
 
+Irc.prototype.sendAction = function(channel, msg) {
+  try {
+    log.info('%s - %s', channel, msg);
+    this.client.action(channel, this.colors.wrap('light_red',msg));
+  }
+  catch (error) {
+      log.error("send - %s",error);
+  }
+};
+
+
 Irc.prototype.debugSend = function(doc) {
   try {
     var msg = util.format('[%s]->[%s] : %j', doc.sender, doc.destination, doc.data);
