@@ -15,34 +15,18 @@ function Irc(cfg) {
 
 }
 
-Irc.prototype.send = function(channel, msg) {
-  try {
-    log.info('%s - %s', channel, msg);
-    this.client.say(channel, this.colors.wrap('light_red',msg));
-  }
-  catch (error) {
-      log.error("send - %s",error);
-  }
-};
-
-Irc.prototype.sendAction = function(channel, msg) {
-  try {
-    log.info('%s - %s', channel, msg);
+Irc.prototype.send = function(channel, msg, actionable) {
+  log.info('%s - %s', channel, msg);
+  if ( actionable ){
     this.client.action(channel, this.colors.wrap('light_red',msg));
   }
-  catch (error) {
-      log.error("send - %s",error);
+  else {
+    this.client.say(channel, this.colors.wrap('light_red',msg));
   }
 };
 
-
 Irc.prototype.debugSend = function(doc) {
-  try {
-    var msg = util.format('[%s]->[%s] : %j', doc.sender, doc.destination, doc.data);
-    log.info(msg);
-    this.client.say('##rqtest', msg);
-  }
-  catch (error) {
-      log.error("debugSend - %s",error);
-  }
+  var msg = util.format('[%s]->[%s] : %j', doc.sender, doc.destination, doc.data);
+  log.info(msg);
+  this.client.say('##rqtest', msg);
 };

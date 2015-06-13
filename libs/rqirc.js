@@ -14,19 +14,15 @@ var irc     = new Irc(config.irc);
 couch.feed.on('change', function (change) {
   var doc = change.doc;
   log.info("change: %j", change);
-    // Send all messages to ##rqtest
-    irc.debugSend(doc);
 
-    //validateData(doc);
-    if ( doc.destination === config.rq.sender ){
-      log.info("Sending irc - [to: %s]",doc.data.channel);
-      if ( doc.data.isaction === true ){
-        irc.sendAction(doc.data.channel, doc.data.message);
-      }
-      else {
-        irc.send(doc.data.channel, doc.data.message);
-      }
-    }
+  // Send all messages to ##rqtest
+  irc.debugSend(doc);
+
+  //validateData(doc);
+  if ( doc.destination === config.rq.sender ){
+    log.info("Sending irc - [to: %s]",doc.data.channel);
+    irc.send(doc.data.channel, doc.data.message, doc.data.isaction);
+  }
 });
 
 couch.feed.on('error', function(er) {
