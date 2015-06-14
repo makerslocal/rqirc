@@ -1,0 +1,26 @@
+{
+  "rq" : {
+    "sender" : "rqirc"
+  },
+
+  "irc" : {
+    "server" : "irc.freenode.net",
+    "nick"   : "rqirc",
+    "opts"   :{
+      "userName" : "rqirc",
+      "realName" : "RedQueen irc bot",
+      "port"     : 6697,
+      "secure"   : true,
+      "channels" : [
+                     "##rqtest"
+                   ]
+    }
+  },
+
+  "couch" : {
+    "url"    : "http://localhost",
+    "port"   : "5984",
+    "db"     : "rqmessages",
+    "filter" : "rqirc"
+  }
+}

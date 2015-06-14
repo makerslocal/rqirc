@@ -4,6 +4,7 @@
   "description": "RedQueen irc module",
   "main": "index.js",
   "dependencies": {
+    "config": "^1.14.0",
     "irc": "^0.3.12",
     "logule": "^2.0.1",
     "minimist": "^1.1.1",

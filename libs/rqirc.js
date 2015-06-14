@@ -1,4 +1,4 @@
-var config  = GLOBAL.config;
+var config  = require('config');
 var util    = require('util');
 var log     = require('logule').init(module, 'rqirc');
 
