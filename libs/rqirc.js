@@ -15,7 +15,12 @@ function validateData(doc){
   // Check if sender of message is also receaver
   if ( doc.sender === config.rq.sender ) { throw 'Sender is me'; }
 
-  // Chck the whitelist
+  // Check if data items exists and are strings
+  if ( typeof doc.data.message !== 'string' ) { throw 'message not valid'; }
+  if ( typeof doc.data.isaction !== 'bool' ) { throw 'isaction not valid'; }
+  if ( typeof doc.data.channel !== 'string' ) { throw 'channel not valid'; }
+
+  // Only allow connected channels
   if ( config.irc.opts.channels.indexOf(doc.data.channel) === -1) { throw "Channel not in whitelist"; }
 
   return true;
