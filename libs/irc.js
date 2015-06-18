@@ -2,17 +2,9 @@ var util = require('util');
 var log  = require('logule').init(module, 'irc');
 var irc  = require('irc');
 
-// return constructor
-module.exports = Irc;
-
 function Irc(cfg) {
   this.client = new irc.Client(cfg.server, cfg.nick, cfg.opts);
   this.colors = irc.colors;
-
-  this.client.addListener('join', function (channel, nick, message) {
-    log.info('Connected - %s - %s', channel, nick);
-  });
-
 }
 
 Irc.prototype.send = function(channel, msg, actionable) {
@@ -30,3 +22,8 @@ Irc.prototype.debugSend = function(doc) {
   log.info(msg);
   this.client.say('##rqtest', msg);
 };
+
+// return constructor
+module.exports = Irc;
+
+

@@ -17,7 +17,7 @@ function validateData(doc){
 
   // Check if data items exists and are strings
   if ( typeof doc.data.message !== 'string' ) { throw 'message not valid'; }
-  if ( typeof doc.data.isaction !== 'bool' ) { throw 'isaction not valid'; }
+  if ( typeof doc.data.isaction !== 'boolean' ) { throw 'isaction not valid'; }
   if ( typeof doc.data.channel !== 'string' ) { throw 'channel not valid'; }
 
   // Only allow connected channels
@@ -50,4 +50,9 @@ couch.feed.on('error', function(er) {
     log.error(er);
 });
 
-couch.feed.follow();
+irc.client.addListener('join', function (channel, nick) {
+  log.info('Connected - %s - %s', channel, nick);
+  couch.feed.follow();
+});
+
+
