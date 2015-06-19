@@ -50,9 +50,6 @@ couch.feed.on('error', function(er) {
     log.error(er);
 });
 
-irc.client.addListener('join', function (channel, nick) {
-  log.info('Connected - %s - %s', channel, nick);
-  couch.feed.follow();
-});
+couch.feed.follow();
 
 
