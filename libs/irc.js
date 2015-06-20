@@ -44,13 +44,13 @@ Irc.prototype.send = function(channel, msg, actionable) {
 };
 
 Irc.prototype.debugSend = function(doc) {
-  if ( this.channels.indexOf('##rqtest') === -1) {
+  if ( this.channels.indexOf(this.cfg.debugchan) === -1) {
     log.error("Channel not connected");
     return;
   }
   var msg = util.format('[%s]->[%s] : %j', doc.sender, doc.destination, doc.data);
   log.info(msg);
-  this.client.say('##rqtest', msg);
+  this.client.say(this.cfg.debugchan, msg);
 };
 
 // return constructor

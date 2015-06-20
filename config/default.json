@@ -1,11 +1,12 @@
 {
   "rq" : {
-    "sender" : "rqirc"
+    "sender"        : "rqirc"
   },
 
   "irc" : {
-    "server" : "irc.freenode.net",
-    "nick"   : "rqirc",
+    "server"     : "irc.freenode.net",
+    "nick"       : "rqirc",
+    "debugchan"  : "##rqtest",
     "opts"   :{
       "userName" : "rqirc",
       "realName" : "RedQueen irc bot",
