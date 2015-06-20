@@ -1,9 +1,6 @@
 var nano = require('nano');
 var log = require('logule').init(module, 'couch');
 
-// return constructor
-module.exports = Couch;
-
 function Couch(cfg) {
   var couch = nano({
     'url'      : cfg.url,
@@ -19,3 +16,6 @@ function Couch(cfg) {
     //query_params : {name : cfg.filter}
   });
 }
+
+// return constructor
+module.exports = Couch;
