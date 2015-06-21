@@ -1,0 +1,15 @@
+{
+  "irc" : {
+    "nick"   : "rqirc2",
+    "opts" :{
+      "channels" : [
+                     "##rqtest"
+                   ]
+    }
+  },
+
+  "couch" : {
+    "url"    : "https://frcv.net/couch",
+    "port"   : null
+  }
+}
