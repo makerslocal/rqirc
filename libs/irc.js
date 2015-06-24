@@ -4,7 +4,8 @@ var irc  = require('irc');
 
 function Irc(cfg) {
   // Public
-  this.client = new irc.Client(cfg.server, cfg.nick, cfg.opts);
+  this.config = cfg;
+  this.client = new irc.Client(this.config.server, this.config.nick, this.config.opts);
   this.colors = irc.colors;
   this.channels = [];
 
@@ -14,7 +15,7 @@ function Irc(cfg) {
   // add channel to array on join
   this.client.on('join', function (channel, nick) {
     log.info("JOIN: %s", channel);
-    if (nick === cfg.nick){
+    if (nick === this.config.nick){
       self.channels.push(channel);
     }
   });
@@ -23,7 +24,7 @@ function Irc(cfg) {
   this.client.on('part', function (channel, nick) {
     log.info("PART: %s", channel);
     var index = self.channels.indexOf(channel);
-    if (index > -1 && nick === cfg.nick) {
+    if (index > -1 && nick === this.config.nick) {
       self.channels.splice(index, 1);
     }
   });
@@ -48,13 +49,13 @@ Irc.prototype.send = function(channel, msg, actionable) {
 };
 
 Irc.prototype.debugSend = function(doc) {
-  if ( this.channels.indexOf(this.cfg.debugchan) === -1) {
+  if ( this.channels.indexOf(this.config.debugchan) === -1) {
     log.error("Channel not connected");
     return;
   }
   var msg = util.format('[%s]->[%s] : %j', doc.sender, doc.destination, doc.data);
   log.info(msg);
-  this.client.say(this.cfg.debugchan, msg);
+  this.client.say(this.config.debugchan, msg);
 };
 
 // return constructor
