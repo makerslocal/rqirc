@@ -27,6 +27,10 @@ function Irc(cfg) {
       self.channels.splice(index, 1);
     }
   });
+
+  this.client.on('error', function(error){
+    log.error(error);
+  });
 }
 
 Irc.prototype.send = function(channel, msg, actionable) {
