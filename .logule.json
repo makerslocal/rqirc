@@ -1,0 +1,10 @@
+{
+  "stdout"    : {
+    "timestamp": {
+      "date"      : true,
+      "reverse"   : false,
+      "delimiter" : "-",
+      "precise"   : false
+    }
+  }
+}
