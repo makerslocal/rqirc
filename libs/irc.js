@@ -36,8 +36,7 @@ function Irc(cfg) {
 
 Irc.prototype.send = function(channel, msg, actionable) {
   if ( this.channels.indexOf(channel) === -1) {
-    log.error("Channel not connected");
-    return;
+    throw "Message not sent, not connected to channel";
   }
   log.info('%s - %s', channel, msg);
   if ( actionable ){
@@ -50,8 +49,7 @@ Irc.prototype.send = function(channel, msg, actionable) {
 
 Irc.prototype.debugSend = function(doc) {
   if ( this.channels.indexOf(this.config.debugchan) === -1) {
-    log.error("Channel not connected");
-    return;
+    throw "Message not sent, not connected to channel";
   }
   var msg = util.format('[%s]->[%s] : %j', doc.sender, doc.destination, doc.data);
   log.info(msg);
