@@ -14,7 +14,7 @@ function Irc(cfg) {
 
   // add channel to array on join
   this.client.on('join', function (channel, nick) {
-    log.info("JOIN: %s", channel);
+    log.info("JOIN: %s %s", channel, nick);
     if (nick === self.config.nick){
       self.channels.push(channel);
     }
@@ -22,7 +22,7 @@ function Irc(cfg) {
 
   // remove channel for array on part
   this.client.on('part', function (channel, nick) {
-    log.info("PART: %s", channel);
+    log.info("PART: %s %s", channel, nick);
     var index = self.channels.indexOf(channel);
     if (index > -1 && nick === self.config.nick) {
       self.channels.splice(index, 1);
