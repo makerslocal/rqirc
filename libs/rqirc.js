@@ -47,6 +47,14 @@ couch.feed.on('error', function(er) {
     log.error(er);
 });
 
+irc.rqevent.on('message', function(msg){
+  log.info('rqevent msg: %j', msg);
+});
+
+irc.rqevent.on('pm', function(msg){
+  log.info('rqevent pm: %j', msg);
+});
+
 couch.feed.follow();
 
 
