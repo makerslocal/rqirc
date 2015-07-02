@@ -37,20 +37,21 @@ function Irc(cfg) {
   });
 
   this.client.on('message', function(nick, to, text, message){
+    var pm = ( to === self.config.nick ) ? true : false;
     var msg = {
                 'nick' : nick,
+                'pm'   : pm,
                 'to'   : to,
                 'text' : text,
                 'message' : message
               };
-    if ( to === self.config.nick ){
-      self.rqevent.emit('pm', msg);
-    }
-    else {
-      var re = RegExp('^\!'+self.config.nick+' ');
-      if ( re.test(text) ){
-        self.rqevent.emit('message', msg);
-      }
+
+    // emit messages to us
+    var re = RegExp('^\!' + self.config.command + ' ');
+    if ( re.test(text) ){
+      var res = msg.text.split(' ');
+      msg.text = msg.text.split(' ').slice(2).join(' ');
+      self.rqevent.emit(res[1], msg);
     }
   });
 }

@@ -10,6 +10,8 @@ var couch   = new Couch(config.couch);
 var Irc     = require('./irc.js');
 var irc     = new Irc(config.irc);
 
+var echo = require('../irc_modules/echo.js')(irc);
+
 
 function validateData(doc){
   // Check if sender of message is also receaver
