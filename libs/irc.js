@@ -40,9 +40,9 @@ function Irc(cfg) {
     var pm = ( to === self.config.nick ) ? true : false;
     var split = text.split(' ');
     var msg = {
-                'nick' : nick,
-                'pm'   : pm,
-                'to'   : to,
+                'nick'    : nick,
+                'pm'      : pm,
+                'to'      : to,
                 'message' : message
               };
     if ( pm ) {
@@ -60,6 +60,7 @@ function Irc(cfg) {
 }
 
 Irc.prototype.send = function(channel, msg, actionable) {
+  // TODO: Check if pm
   if ( this.channels.indexOf(channel) === -1) {
     throw "Message not sent, not connected to channel";
   }
