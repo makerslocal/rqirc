@@ -59,17 +59,17 @@ function Irc(cfg) {
   });
 }
 
-Irc.prototype.send = function(channel, msg, actionable) {
-  // TODO: Check if pm
-  if ( this.channels.indexOf(channel) === -1) {
+Irc.prototype.send = function(to, msg, actionable) {
+  // test if bot is in channel or if its a PM
+  if ( this.channels.indexOf(to) === -1 && /^#/.test(to) ) {
     throw "Message not sent, not connected to channel";
   }
-  log.info('%s - %s', channel, msg);
+  log.info('send message: %s - %s', to, msg);
   if ( actionable ){
-    this.client.action(channel, this.colors.wrap('light_red',msg));
+    this.client.action(to, this.colors.wrap('light_red',msg));
   }
   else {
-    this.client.say(channel, this.colors.wrap('light_red',msg));
+    this.client.say(to, this.colors.wrap('light_red',msg));
   }
 };
 
