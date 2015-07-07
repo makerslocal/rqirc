@@ -37,7 +37,7 @@ couch.feed.on('change', function (change) {
   try {
     validateData(doc);
     log.info("Sending irc - [to: %s]",doc.data.channel);
-    irc.send(doc.data.channel, doc.data.message, doc.data.isaction, false);
+    irc.send(doc.data.channel, doc.data.message, doc.data.isaction);
   }
   catch (error) {
     log.error("%s",error);
