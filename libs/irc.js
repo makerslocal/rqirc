@@ -37,21 +37,27 @@ function Irc(cfg) {
   });
 
   this.client.on('message', function(nick, to, text, message){
-    var pm = ( to === self.config.nick ) ? true : false;
-    var split = text.split(' ');
+    // Lets set some variables
     var msg = {
                 'nick'    : nick,
-                'pm'      : pm,
                 'to'      : to,
-                'message' : message
+                'text'    : text,
+                'message' : message,
+                'reply'   : ''
               };
-    if ( pm ) {
+    var split = msg.text.split(' ');
+
+    // If PM - set reply, remove command
+    if ( msg.to === self.config.nick ) {
+      msg.reply = msg.nick;
       msg.text = split.slice(1).join(' ');
       self.rqevent.emit(split[0], msg);
     }
+    // If channel command - set reply, and remove command
     else {
       var re = RegExp('^\!' + self.config.command + ' ');
       if ( re.test(text) ) {
+        msg.reply = msg.to;
         msg.text = split.slice(2).join(' ');
         self.rqevent.emit(split[1], msg);
       }
