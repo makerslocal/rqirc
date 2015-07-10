@@ -1,9 +1,23 @@
 # rqmailer
-rqirc is a irc gateway for the RedQueen network.  Currently it only supports the ##rqtest channel.
+rqirc is a irc gateway for the [RedQueen](https://github.com/tylercrumpton/red-queen) network.  Currently it only supports the ##rqtest channel.
 
 ## Usage
 * Create config/production.json and use 'export NODE_ENV=production'
-* Message like this sent to [RedQueen](https://github.com/tylercrumpton/red-queen)
+** Change anything from config/default.json
+```
+
+## Plugins
+* subscript to events on irc.rqevent
+** messages are received in the following format
+```
+{
+  "nick" : "itsamenathan",
+  "to"   : "channel or nick",
+  "text" : "text of message",
+  "message" : "raw irc message",
+  "reply" : "channel or nick to reply to"
+}
+* Message from couch are received in the following formate
 ```
 {
    "destination": "rqirc",
@@ -13,8 +27,6 @@ rqirc is a irc gateway for the RedQueen network.  Currently it only supports the
        "isaction": true
    }
 }
-```
-* more is needed here
 
 ## Software
 * [nodejs](https://nodejs.org/) - I mean?
