@@ -30,6 +30,6 @@ rqirc is a irc gateway for the [RedQueen](https://github.com/tylercrumpton/red-q
 
 ## Software
 * [nodejs](https://nodejs.org/) - I mean?
-* [nodemailer](https://github.com/martynsmith/node-irc) - irc library
+* [node-irc](https://github.com/martynsmith/node-irc)
 * [nano](https://github.com/dscape/nano) - couchdb library
 * [config](https://github.com/lorenwest/node-config) - config management
