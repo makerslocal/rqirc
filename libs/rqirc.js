@@ -10,7 +10,7 @@ var couch   = new Couch(config.couch);
 var Irc     = require('./irc.js');
 var irc     = new Irc(config.irc);
 
-require('../irc_modules/common.js')(irc);
+require('../irc_modules/common.js')(irc, couch);
 
 
 function validateData(doc){
