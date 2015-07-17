@@ -1,6 +1,6 @@
 {
   "irc" : {
-    "nick"   : "rqirc2",
+    "nick"   : "rqirc1",
     "opts" :{
       "channels" : [
                      "##rqtest"

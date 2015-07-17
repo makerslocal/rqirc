@@ -18,7 +18,7 @@ function Irc(cfg) {
   // add channel to array on join
   this.client.on('join', function (channel, nick) {
     log.info("JOIN: %s %s", channel, nick);
-    if (nick === self.config.nick){
+    if (nick === self.client.nick){
       self.channels.push(channel);
     }
   });
@@ -27,7 +27,7 @@ function Irc(cfg) {
   this.client.on('part', function (channel, nick) {
     log.info("PART: %s %s", channel, nick);
     var index = self.channels.indexOf(channel);
-    if (index > -1 && nick === self.config.nick) {
+    if (index > -1 && nick === self.client.nick) {
       self.channels.splice(index, 1);
     }
   });
@@ -48,7 +48,7 @@ function Irc(cfg) {
     var split = msg.text.split(' ');
 
     // If PM - set reply, remove command
-    if ( msg.to === self.config.nick ) {
+    if ( msg.to === self.client.nick ) {
       msg.reply = msg.nick;
       msg.text = split.slice(1).join(' ');
       self.rqevent.emit(split[0], msg);
