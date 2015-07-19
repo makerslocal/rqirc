@@ -1,6 +1,7 @@
 {
   "rq" : {
-    "sender"        : "rqirc"
+    "sender" : "rqirc",
+    "key"    : "abcdef"
   },
 
   "irc" : {
