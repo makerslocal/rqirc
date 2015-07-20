@@ -1,7 +1,8 @@
 {
   "rq" : {
     "sender" : "rqirc",
-    "key"    : "abcdef"
+    "key"    : "abcdef",
+    "url"    : "https://crump.space/rq-dev/api/v1.0/messages"
   },
 
   "irc" : {
