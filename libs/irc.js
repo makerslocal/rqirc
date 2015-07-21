@@ -51,15 +51,15 @@ function Irc(cfg) {
     if ( msg.to === self.client.nick ) {
       msg.reply = msg.nick;
       msg.text = split.slice(1).join(' ');
-      self.rqevent.emit(split[0], msg);
+      self.rqevent.emit(split[0].substr(1), msg);
     }
     // If channel command - set reply, and remove command
     else {
-      var re = RegExp('^\!' + self.config.command + ' ');
+      var re = /^!\w+ /;
       if ( re.test(text) ) {
         msg.reply = msg.to;
-        msg.text = split.slice(2).join(' ');
-        self.rqevent.emit(split[1], msg);
+        msg.text = split.slice(1).join(' ');
+        self.rqevent.emit(split[0].substr(1), msg);
       }
     }
   });
