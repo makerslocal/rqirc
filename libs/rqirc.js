@@ -10,7 +10,10 @@ var couch   = new Couch(config.couch);
 var Irc     = require('./irc.js');
 var irc     = new Irc(config.irc);
 
-require('../irc_modules/common.js')(irc, couch);
+var Redqueen     = require('./redqueen.js');
+var redqueen     = new Redqueen(config.rq);
+
+require('../irc_modules/common.js')(irc, couch, redqueen);
 
 
 function validateData(doc){

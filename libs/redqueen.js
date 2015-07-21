@@ -5,13 +5,13 @@ function Redqueen(cfg) {
   this.config   = cfg;
 }
 
-Redqueen.prototype.send = function(destination, data, type) {
+Redqueen.prototype.send = function(type, destination, data) {
   var options = { method: 'POST',
-    url: this.config.rq.url,
+    url: this.config.url,
     headers: { 'content-type': 'application/json' },
     body:
       { type: type,
-        key: this.config.rq.key,
+        key: this.config.key,
         destination: destination,
         data: data
       },
@@ -23,8 +23,6 @@ Redqueen.prototype.send = function(destination, data, type) {
   }
   log.info(response);
   });
-
-
 };
 
 // return constructor
