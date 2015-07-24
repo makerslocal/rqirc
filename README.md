@@ -8,8 +8,20 @@ rqirc is a irc gateway for the [RedQueen](https://github.com/tylercrumpton/red-q
 
 ##API
 ###IRC
-* irc.send(to, msg, actionable)
-* irc.debugSend = (doc)
+* config - options from config file
+* client - client connection information
+* colors - set irc colors
+* rqevent.on(!event, function(msg))
+** ``` msg = {
+     'nick'    : nick,
+     'to'      : to,
+     'text'    : text,
+     'message' : message,
+     'reply'   : ''
+ };```
+* send(to, msg, actionable) - send irc message
+* debugSend(doc) - print couchdb doc to debugchannel
+ 
 
 ## Plugins
 * subscript to events on irc.rqevent
