@@ -6,6 +6,11 @@ rqirc is a irc gateway for the [RedQueen](https://github.com/tylercrumpton/red-q
 ** Change anything from config/default.json
 ```
 
+##API
+###IRC
+* irc.send(to, msg, actionable)
+* irc.debugSend = (doc)
+
 ## Plugins
 * subscript to events on irc.rqevent
 ** messages are received in the following format
