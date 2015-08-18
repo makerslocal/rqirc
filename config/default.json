@@ -22,9 +22,7 @@
   },
 
   "couch" : {
-    "url"    : "http://localhost",
-    "port"   : "5984",
-    "db"     : "rqmessages",
-    "filter" : "rqirc"
+    "url"    : "https://crump.space/couch",
+    "db"     : "rqmessages"
   }
 }
