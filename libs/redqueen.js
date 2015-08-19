@@ -18,10 +18,10 @@ Redqueen.prototype.send = function(type, destination, data) {
     json: true };
 
   request(options, function (error, response, body) {
-  if (error){
-    log.error(error);
-  }
-  log.info(response);
+    if (error){
+      log.error(error);
+    }
+    log.info(body);
   });
 };
 
