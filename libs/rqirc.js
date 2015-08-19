@@ -13,7 +13,7 @@ var irc     = new Irc(config.irc);
 var Redqueen     = require('./redqueen.js');
 var redqueen     = new Redqueen(config.rq);
 
-require('../irc_modules/common.js')(irc, couch, redqueen);
+require('../irc_modules/common.js')(irc, redqueen);
 
 
 function validateData(doc){
