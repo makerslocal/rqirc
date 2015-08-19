@@ -25,6 +25,6 @@ module.exports = function(irc, redqueen) {
     redqueen.send('command', 'bigsign', data);
     var reply = util.format('%s: New diplomatic cable decrypted: %s', msg.nick, str);
     irc.send(msg.reply, reply, false);
-    log.info('SENDING MSG: %s %s', msg.reply, reply);
+    log.info('SENDING MSG: %s: %s', msg.reply, reply);
   });
 };

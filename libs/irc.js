@@ -62,7 +62,7 @@ Irc.prototype.send = function(to, msg, actionable) {
   if ( !this.client.chans.hasOwnProperty(to) && /^#/.test(to) ){
     throw "Message not sent, not connected to channel";
   }
-  log.info('send message: %s - %s', to, msg);
+  log.info('sending to irc : %s - %s', to, msg);
   if ( actionable ){
     this.client.action(to, this.colors.wrap('light_red',msg));
   }
@@ -76,7 +76,7 @@ Irc.prototype.debugSend = function(doc) {
     throw "Message not sent, not connected to channel";
   }
   var msg = util.format('[%s]->[%s] : %j', doc.sender, doc.destination, doc.data);
-  log.info(msg);
+  log.info('debug msg: %s', msg);
   this.client.say(this.config.debugchan, msg);
 };
 

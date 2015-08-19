@@ -14,6 +14,7 @@ var Redqueen     = require('./redqueen.js');
 var redqueen     = new Redqueen(config.rq);
 
 require('../irc_modules/common.js')(irc, redqueen);
+log.info(config);
 
 
 function validateData(doc){
@@ -39,7 +40,6 @@ couch.feed.on('change', function (change) {
 
   try {
     validateData(doc);
-    log.info("Sending irc - [to: %s]",doc.data.channel);
     irc.send(doc.data.channel, doc.data.message, doc.data.isaction);
   }
   catch (error) {
