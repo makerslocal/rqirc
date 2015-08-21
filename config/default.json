@@ -24,5 +24,13 @@
   "couch" : {
     "url"    : "https://crump.space/couch",
     "db"     : "rqmessages"
-  }
+  },
+
+  "deadpan" : [
+    "diplomatic cable decrypted",
+    "all hands bulletin",
+    "new TPS report coversheet", /* http://www.imdb.com/title/tt0151804/quotes?item=qt0386855 */
+    "aperature science empoyees take note",
+    "doubleplusungood thoughtcrime detected"
+  ]
 }
