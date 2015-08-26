@@ -24,8 +24,18 @@ module.exports = function(irc, redqueen) {
     var data = {text: str, light: light, sender: msg.nick, sound: sound};
     redqueen.send('command', 'bigsign', data);
     /* Pick a random deadpan delivery */
-    var delivery = config.deadpan[Math.floor( Math.random() * config.deadpan.length )];
-    var reply = util.format('%s: %s: %s', msg.nick, delivery, str);
+    deadpan = [
+      "Diplomatic cable decrypted",
+      "Field agent reporting in",
+      "Oh look what the C.A.T. dragged in",
+      "All hands bulletin",
+      "Message in a bottle retrieved",
+      "New TPS report coversheet",
+      "Aperature Science policy #3942",
+      "Doubleplusungood thoughtcrime"
+    ];
+    var delivery = deadpan[Math.floor( Math.random() * deadpan.length )];
+    var reply = util.format('%s: %s [via %s]', delivery, str, msg.nick);
     irc.send(msg.reply, reply, false);
     log.info('SENDING MSG: %s: %s', msg.reply, reply);
   });
