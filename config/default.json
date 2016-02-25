@@ -6,19 +6,27 @@
   },
 
   "irc" : {
-    "server"     : "irc.freenode.net",
-    "nick"       : "rqirc",
-    "debugchan"  : "##rqtest",
-    "command"    : "rq",
-    "opts"   :{
-      "userName" : "rqirc",
-      "realName" : "RedQueen irc bot",
-      "port"     : 6697,
-      "secure"   : true,
-      "channels" : [
-                     "##rqtest"
-                   ]
-    }
+    "bot"  : {
+      "debugchan"  : "##rqtest",
+      "command"    : "rq"
+    },
+
+    "connection" : {
+      "username"      : "rqirc",
+      "realname"      : "RedQueen Irc Bot",
+      "nick"          : "rqirc",
+      "server"        : "irc.freenode.net",
+      "port"          : 6697,
+      "autoReconnect" : 15000,
+      "secure"        : true,
+      "floodDelay"    : 1000,
+      "debug"         : false
+
+    },
+
+    "channels" : [
+                   "##rqtest"
+                 ]
   },
 
   "couch" : {
