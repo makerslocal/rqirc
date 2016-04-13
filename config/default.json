@@ -1,10 +1,4 @@
 {
-  "rq" : {
-    "sender" : "rqirc",
-    "key"    : "abcdef",
-    "url"    : "https://crump.space/rq-dev/api/v1.0/messages"
-  },
-
   "irc" : {
     "bot"  : {
       "debugchan"  : "##rqtest",
@@ -29,8 +23,8 @@
                  ]
   },
 
-  "couch" : {
-    "url"    : "https://crump.space/couch",
-    "db"     : "rqmessages"
+  "mqtt" : {
+    "url"    : "mqtts://frcv.net:4885"
   }
+
 }

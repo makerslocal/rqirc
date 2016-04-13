@@ -1,8 +1,7 @@
 var util = require('util');
 var log  = require('logule').init(module, 'irc');
 var irc  = require('internet-relay-chat');
-var events = require("events");
-var EventEmitter = require("events").EventEmitter;
+var EventEmitter = require('eventemitter2').EventEmitter2;
 
 //
 // TODO: create events for all the things
@@ -14,7 +13,10 @@ function Irc(cfg) {
   this.nick     = this.config.connection.nick;
   this.client   = new irc(this.config.connection);
   this.colors   = irc.colors;
-  this.rqevent  = new EventEmitter();
+  this.rqevent  = new EventEmitter({
+                        wildcard: true,
+                        delimiter: '/'
+                      });
 
   // Private
   var self = this;
@@ -85,17 +87,12 @@ Irc.prototype.send = function(to, msg, actionable) {
   }
 };
 
-//
-// TODO: fix for new type of irc message
-//
 Irc.prototype.debugSend = function(doc) {
   if ( !this.client.channels.hasOwnProperty(this.config.bot.debugchan) ) {
     throw "Message not sent, not connected to channel";
   }
-  var msg = util.format('[%s]->[%s] : %j', doc.sender, doc.destination, doc.data);
-  log.info('debug msg: %s', msg);
-  this.client.say(this.config.bot.debugchan, msg);
-  this.client.message(this.config.bot.debugchan, msg));
+  log.info('debug msg: %j', doc);
+  this.client.message(this.config.bot.debugchan, util.format('%j', doc));
 };
 
 // return constructor
