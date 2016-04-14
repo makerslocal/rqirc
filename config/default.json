@@ -24,7 +24,7 @@
   },
 
   "mqtt" : {
-    "url"    : "mqtts://frcv.net:4885"
+    "url"    : "mqtts://256.makerslocal.org:35801"
   }
 
 }

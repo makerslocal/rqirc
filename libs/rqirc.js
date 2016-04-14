@@ -11,28 +11,23 @@ var mqtt   = new Mqtt(config.mqtt);
 var Irc     = require('./irc.js');
 var irc     = new Irc(config.irc);
 
-require('../irc_modules/common.js')(irc, mqtt);
-log.info(config);
+//require('../irc_modules/common.js')(irc, mqtt);
+//log.info(config);
 
-function validateData(doc){
-  // Check if sender of message is also receaver
-  if ( doc.sender === config.rq.sender ) { throw 'Sender is me'; }
+// send all irc commands to mqtt
+irc.rqevent.on('*', function(msg){
 
-  // Check if data items exists and are strings
-  if ( typeof doc.data.message !== 'string' ) { throw 'message not valid'; }
-  if ( typeof doc.data.isaction !== 'boolean' ) { throw 'isaction not valid'; }
-  if ( typeof doc.data.channel !== 'string' ) { throw 'channel not valid'; }
+  // strip invalid topc chars and create topic
+  var channel = msg.channel.replace(/[#+]/g, "");
+  var command = msg.command.replace(/[#+]/g, "");
+  var topic = util.format('ml256/irc/%s/command/%s', channel, command);
 
-  return true;
-}
+  // convert msg json into string
+  var message = JSON.stringify(msg);
 
-mqtt.mqevent.on('ml256/*/temp0/temp', function(payload){
-  var msg = util.format('Temp in %s is %s', this.event, payload.temperature);
-  try {
-    irc.debugSend(msg);
-  }
-  catch (error) {
-    log.error("%s",error);
-  }
+  // send mqtt message
+  mqtt.send(topic, message);
+
+  // send copy of message to irc debug chan
+  irc.debugSend(util.format('%s %s', topic, message));
 });
-

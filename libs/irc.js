@@ -53,22 +53,27 @@ function Irc(cfg) {
   this.client.on('message', function(sender, channel, message){
     // Lets set some variables
     var msg = {
-                'sender' : sender.nick,
-                'reply'  : channel,
-                'text'   : ''
+                'command': '',
+                'nick' : sender.nick,
+                'channel'  : channel,
+                'message'   : ''
               };
-    // split message
-    var split = message.split(' ');
 
     // test if message is command
-    var re = /^!\w+ /;
+    var re = /^!\w+/;
     if ( re.test(message) ) {
-      // remove first letter from message
-      msg.text = split.slice(1).join(' ');
+      // split message
+      var split = message.split(' ');
+
+      // remove first letter from message to get command
+      msg.command = split[0].substr(1);
+
+      // create rest of string as message
+      msg.message = split.slice(1).join(' ');
       log.info(msg);
 
       // emit event for irc_modules
-      self.rqevent.emit(split[0].substr(1), msg);
+      self.rqevent.emit(msg.command, msg);
     }
   });
 }
@@ -87,12 +92,12 @@ Irc.prototype.send = function(to, msg, actionable) {
   }
 };
 
-Irc.prototype.debugSend = function(doc) {
+Irc.prototype.debugSend = function(msg) {
   if ( !this.client.channels.hasOwnProperty(this.config.bot.debugchan) ) {
     throw "Message not sent, not connected to channel";
   }
-  log.info('debug msg: %j', doc);
-  this.client.message(this.config.bot.debugchan, util.format('%j', doc));
+  log.info('debug msg: %s', msg);
+  this.client.message(this.config.bot.debugchan, msg);
 };
 
 // return constructor

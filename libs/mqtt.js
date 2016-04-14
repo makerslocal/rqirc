@@ -22,7 +22,7 @@ module.exports = Mqtt;
 function Mqtt(cfg) {
   log.info("creating new mqtt connection");
   this.client  = mqtt.connect(cfg.url);
-  this.mqevent  = new EventEmitter({
+  this.mqevent = new EventEmitter({
                         wildcard: true,
                         delimiter: '/'
                       });
@@ -36,11 +36,11 @@ function Mqtt(cfg) {
 
   this.client.subscribe("ml256/#");
   this.client.on('message', function (topic, payload) {
-    log.info("received mqtt message");
+    log.info("mqtt message -> %s", topic, payload.toString());
     self.mqevent.emit(topic, JSON.parse(payload.toString()));
   });
 }
 
 Mqtt.prototype.send = function(topic, message) {
-  client.publish(topic, message);
+  this.client.publish(topic, message);
 };
