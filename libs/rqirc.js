@@ -11,7 +11,7 @@ var mqtt   = new Mqtt(config.mqtt);
 var Irc     = require('./irc.js');
 var irc     = new Irc(config.irc);
 
-//require('../irc_modules/common.js')(irc, mqtt);
+require('../irc_modules/common.js')(irc, mqtt);
 //log.info(config);
 
 // send all irc commands to mqtt

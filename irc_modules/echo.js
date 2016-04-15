@@ -1,7 +1,7 @@
 var log  = require('logule').init(module, 'echo.js');
-module.exports = function(irc, redqueen) {
-  irc.rqevent.on('echo', function(msg){
-    log.info('%s %s', msg.reply, msg.text);
-    irc.send(msg.reply, msg.text, false);
+module.exports = function(irc, mqtt) {
+  mqtt.mqevent.on('ml256/irc/*/command/echo', function(msg){
+    log.info(msg);
+    irc.send(msg.channel, msg.message, false);
   });
 };
