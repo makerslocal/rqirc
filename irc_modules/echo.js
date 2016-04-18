@@ -1,6 +1,7 @@
 var log       = require('logule').init(module, 'echo.js');
 var validator = require('is-my-json-valid');
 
+// Define our json-schema
 var validate = validator({
   type : 'object',
   properties : {
@@ -12,8 +13,13 @@ var validate = validator({
 });
 
 module.exports = function(irc, mqtt) {
+  // subscribe to mqtt topic
   mqtt.subscribe('ml256/irc/+/command/echo');
+
+  // Uses EventEmitter2 for events, can use wildcards.
   mqtt.mqevent.on('ml256/irc/*/command/echo', function(data){
+
+    // use json-schema to validate mqtt data
     if (!validate(data)){
       log.error('json not vaild');
     }

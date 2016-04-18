@@ -3,10 +3,6 @@ var log  = require('logule').init(module, 'irc');
 var irc  = require('internet-relay-chat');
 var EventEmitter = require('eventemitter2').EventEmitter2;
 
-//
-// TODO: create events for all the things
-//
-
 function Irc(cfg) {
   // Public
   this.config   = cfg;  // config.irc
@@ -23,7 +19,7 @@ function Irc(cfg) {
 
   // print log info on connected
   this.client.on('connect', function() {
-    log.info('Connected!!!!');
+    log.info('Connected');
   });
 
   // Connect to server
@@ -31,7 +27,7 @@ function Irc(cfg) {
 
   // Join channels
   this.client.on('registered', function() {
-    log.info('Registered!!!!');
+    log.info('Registered');
     self.client.join(self.config.channels);
   });
 
@@ -46,17 +42,16 @@ function Irc(cfg) {
   });
 
   this.client.on('error', function(error){
-    log.info('Error!!!!');
     log.error(error);
   });
 
   this.client.on('message', function(sender, channel, message){
     // Lets set some variables
     var msg = {
-                'command': '',
-                'nick' : sender.nick,
-                'channel'  : channel,
-                'message'   : ''
+                'command' : '',
+                'nick'    : sender.nick,
+                'channel' : channel,
+                'message' : ''
               };
 
     // test if message is command

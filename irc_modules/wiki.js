@@ -2,6 +2,7 @@ var util      = require('util');
 var log       = require('logule').init(module, 'wiki.js');
 var validator = require('is-my-json-valid');
 
+// Define our json-schema
 var validate = validator({
   type : 'object',
   properties : {
@@ -13,6 +14,7 @@ var validate = validator({
   }
 });
 
+// Take the data from wiki2mqtt and create a string to use with irc.
 function mkMessage(data){
   var summary = util.format('wiki page [[%s]] by %s', data.title, data.user);
   if (data.comment !== null) {
@@ -34,11 +36,16 @@ function mkMessage(data){
 }
 
 module.exports = function(irc, mqtt) {
+  // subscribe to mqtt topic
   mqtt.subscribe('ml256/wiki/change');
+
+  // Uses EventEmitter2 for events, can use wildcards.
   mqtt.mqevent.on('ml256/wiki/change', function(data){
+    // Ignore minor changes
     if (data.hasOwnProperty('minor')) {
       log.warn('minor change');
     }
+    // use json-schema to validate mqtt data
     else if (!validate(data)){
       log.error('json not vaild');
     }
