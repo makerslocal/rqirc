@@ -24,7 +24,13 @@
   },
 
   "mqtt" : {
-    "url"    : "mqtts://256.makerslocal.org:35801"
+    "clientId"   : "rqirc",
+    "protocol"   : "mqtts",
+    "host"       : "256.makerslocal.org",
+    "port"       : "35801",
+    "username"   : "username",
+    "password"   : "password"
+
   }
 
 }
