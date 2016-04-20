@@ -52,7 +52,7 @@ module.exports = function(irc, mqtt) {
     else {
       var message = mkMessage(data);
       log.info(message);
-      irc.send('##rqtest', message, false);
+      irc.send('#makerslocal', message, false);
     }
   });
 };
