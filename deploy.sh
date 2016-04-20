@@ -12,6 +12,6 @@ else
   NODE_CONFIG=$(cat "$DIR/config/production.json")
 fi
 
-docker rm -f name
-docker pull rqirc-mqtt
-docker run -d --name="rqirc-mqtt" -e NODE_CONFIG="$NODE_CONFIG" itsamenathan/$name
+docker rm -f $name
+docker pull itsamenathan/$name
+docker run -d --restart=always --name="$name" -e NODE_CONFIG="$NODE_CONFIG" itsamenathan/$name
