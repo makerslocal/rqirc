@@ -2,56 +2,32 @@ var config  = require('config');
 var util    = require('util');
 var log     = require('logule').init(module, 'rqirc');
 
-// Setup our couchdb connection
-var Couch   = require('./couch.js');
-var couch   = new Couch(config.couch);
+// Setup our mqtt connection
+var Mqtt   = require('./mqtt.js');
+var mqtt   = new Mqtt(config.mqtt);
+
 
 // Setup our irc connection
 var Irc     = require('./irc.js');
 var irc     = new Irc(config.irc);
 
-var Redqueen     = require('./redqueen.js');
-var redqueen     = new Redqueen(config.rq);
-
-require('../irc_modules/common.js')(irc, redqueen);
+require('../irc_modules/common.js')(irc, mqtt);
 log.info(config);
 
+// send all irc commands to mqtt
+irc.rqevent.on('*', function(msg){
 
-function validateData(doc){
-  // Check if sender of message is also receaver
-  if ( doc.sender === config.rq.sender ) { throw 'Sender is me'; }
+  // strip invalid topc chars and create topic
+  var channel = msg.channel.replace(/[#+]/g, "");
+  var command = msg.command.replace(/[#+]/g, "");
+  var topic = util.format('ml256/irc/%s/command/%s', channel, command);
 
-  // Check if data items exists and are strings
-  if ( typeof doc.data.message !== 'string' ) { throw 'message not valid'; }
-  if ( typeof doc.data.isaction !== 'boolean' ) { throw 'isaction not valid'; }
-  if ( typeof doc.data.channel !== 'string' ) { throw 'channel not valid'; }
+  // convert msg json into string
+  var message = JSON.stringify(msg);
 
-  return true;
-}
+  // send mqtt message
+  mqtt.send(topic, message);
 
-
-// Watch couch for a doc changee
-couch.feed.on('change', function (change) {
-  var doc = change.doc;
-  log.info("change: %j", change);
-
-  // Send all messages to ##rqtest
-  irc.debugSend(doc);
-
-  try {
-    validateData(doc);
-    irc.send(doc.data.channel, doc.data.message, doc.data.isaction);
-  }
-  catch (error) {
-    log.error("%s",error);
-  }
-
+  // send copy of message to irc debug chan
+  irc.debugSend(util.format('%s %s', topic, message));
 });
-
-couch.feed.on('error', function(er) {
-    log.error(er);
-});
-
-couch.feed.follow();
-
-
