@@ -1,6 +1,5 @@
 /**
- * Module dependencies.
- * @private
+ * TODO: don't bomb out on connection drops
  */
 
 var mqtt = require('mqtt');

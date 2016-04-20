@@ -1,13 +1,14 @@
 # rqmailer
-rqirc is a irc gateway for the [RedQueen](https://github.com/tylercrumpton/red-queen) network.  Currently it only supports the ##rqtest channel.
+rqirc is a irc gateway for the [RedQueen](https://256.makerslocal.org/wiki/RQ) network.
 
 ## Usage
 * Create config/production.json and use 'export NODE_ENV=production'
 ** Change anything from config/default.json
+docker run -d -e NODE_CONFIG="$(cat config/production.json)" itsamenathan/rqirc
 ```
 
-##API
-###IRC
+## API
+### irc
 * config - options from config file
 * client - client connection information
 * colors - set irc colors
