@@ -30,6 +30,7 @@ module.exports = function(irc, mqtt) {
       irc.send('#makerslocal', message, false);
     }
   });
+};
 
     //log.info('RECEIVED MSG: %s %s', msg.reply, msg.text);
     //var str = msg.text;
@@ -68,5 +69,3 @@ module.exports = function(irc, mqtt) {
     //var reply = util.format('%s: %s [via %s]', delivery, str, msg.nick);
     //irc.send(msg.reply, reply, false);
     //log.info('SENDING MSG: %s: %s', msg.reply, reply);
-  });
-};
