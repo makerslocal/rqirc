@@ -38,7 +38,7 @@ module.exports = function(irc, mqtt) {
       irc.send('#makerslocal', message, false);
     }
   });
-  
+
   mqtt.mqevent.on('ml256/cascade/bank', function(data){
     // use json-schema to validate mqtt data
     if (!validateBank(data)){
@@ -49,10 +49,12 @@ module.exports = function(irc, mqtt) {
       var message = util.format('KACHUNK!');
       if (data.funds === 5.00){
         message = util.format('CasCADE machine funds approaching low levels.');
-      } else if (data.funds === 1.50){
+      }
+      else if (data.funds === 1.50){
         message = util.format('CasCADE machine funds at critically low levels.');
       log.info(message);
       irc.send('#makerslocal', message, false);
+      }
     }
   });
 };
