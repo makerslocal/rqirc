@@ -4,4 +4,5 @@ module.exports = function(irc, mqtt) {
   require('./echo.js')(irc, mqtt);
   require('./wiki.js')(irc, mqtt);
   require('./alert.js')(irc, mqtt);
+  require('./cascade.js')(irc, mqtt);
 };
