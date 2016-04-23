@@ -46,15 +46,15 @@ module.exports = function(irc, mqtt) {
     }
     else {
       // post to irc on certain fund levels, "KACHUNK" on others
-      var message = util.format('KACHUNK!');
+      var message = '';
       if (data.funds === 5.00){
         message = util.format('CasCADE machine funds approaching low levels.');
       }
       else if (data.funds === 1.50){
         message = util.format('CasCADE machine funds at critically low levels.');
+      }
       log.info(message);
       irc.send('#makerslocal', message, false);
-      }
     }
   });
 };
