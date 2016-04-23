@@ -38,11 +38,11 @@ function withdrawal(data){
 // Set message for special withdrawal events.
 //
 function bank(data){
+  var message;
   if (!validateBank(data)){
     log.error('bank message not vaild');
   }
   else {
-    var message = '';
     if (data.funds === 5.00){
       message = util.format('KACHUNK! - CasCADE machine funds approaching low levels.');
     }
