@@ -2,9 +2,6 @@ var util      = require('util');
 var log       = require('logule').init(module, 'cascade.js');
 var validator = require('is-my-json-valid');
 
-// example mesage:
-//   ml256/cascade/withdrawal {"user": "tylercrumpton", "amount": 0.50}
-
 // Define our json-schemas
 var validateWithdrawal = validator({
   type : 'object',
@@ -21,40 +18,62 @@ var validateBank = validator({
   }
 });
 
+// example message:
+//   ml256/cascade/withdrawal {"user": "tylercrumpton", "amount": 0.50}
+//
+// Set message for every withdrawal
+//
+function withdrawal(data){
+  if (!validateWithdrawal(data)){
+    log.error('withdrawal message not vaild');
+  }
+  else {
+    return 'KACHUNK!';
+  }
+}
+
+// example message:
+//   ml256/cascade/bank {"funds": 23.50}
+//
+// Set message for special withdrawal events.
+//
+function bank(data){
+  if (!validateWithdrawal(data)){
+    log.error('withdrawal message not vaild');
+  }
+  else {
+    var message = '';
+    if (data.funds === 5.00){
+      message = util.format('KACHUNK! - CasCADE machine funds approaching low levels.');
+    }
+    else if (data.funds === 1.50){
+      message = util.format('KACHUNK! - CasCADE machine funds at critically low levels.');
+    }
+    return message;
+  }
+}
+
+
 module.exports = function(irc, mqtt) {
-  // subscribe to mqtt topics
-  mqtt.subscribe('ml256/cascade/withdrawal');
-  mqtt.subscribe('ml256/cascade/bank');
+  // subscribe to all cascade messages
+  mqtt.subscribe('ml256/cascade/#');
 
-  mqtt.mqevent.on('ml256/cascade/withdrawal', function(data){
-    // use json-schema to validate mqtt data
-    if (!validateWithdrawal(data)){
-      log.error('withdrawal message not vaild');
+  // Lets do things on events
+  mqtt.mqevent.on('ml256/cascade/*', function(data){
+    var message;
+
+    // Test what event is called
+    if (this.event === 'ml256/cascade/bank'){
+      message = bank(data);
     }
-    else {
-      // create and send message
-      var message = util.format('KACHUNK!');
+    else if (this.event === 'ml256/cascade/withdrawal'){
+      message = withdrawal(data);
+    }
+
+    // Make sure we got a valid message
+    if ( message !== null){
       log.info(message);
       irc.send('#makerslocal', message, false);
     }
   });
-
-  mqtt.mqevent.on('ml256/cascade/bank', function(data){
-    // use json-schema to validate mqtt data
-    if (!validateBank(data)){
-      log.error('bank message not vaild');
-    }
-    else {
-      // post to irc on certain fund levels, "KACHUNK" on others
-      var message = '';
-      if (data.funds === 5.00){
-        message = util.format('CasCADE machine funds approaching low levels.');
-      }
-      else if (data.funds === 1.50){
-        message = util.format('CasCADE machine funds at critically low levels.');
-      }
-      log.info(message);
-      irc.send('#makerslocal', message, false);
-    }
-  });
-};
+ };
