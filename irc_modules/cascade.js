@@ -38,8 +38,8 @@ function withdrawal(data){
 // Set message for special withdrawal events.
 //
 function bank(data){
-  if (!validateWithdrawal(data)){
-    log.error('withdrawal message not vaild');
+  if (!validateBank(data)){
+    log.error('bank message not vaild');
   }
   else {
     var message = '';
