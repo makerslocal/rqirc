@@ -1,7 +1,6 @@
 var should = require('chai').should();
 var rewire = require('rewire');
 var cascade = rewire('../irc_modules/cascade');
-var util = require('util');
 
 describe('bank', function() {
 
@@ -31,4 +30,26 @@ describe('bank', function() {
     var testData = {funds: 1.0};
     should.not.exist(bank(testData));
   });
+
+  it('should return null with invalid message', function() {
+    var testData = {"amount": 0.50};
+    should.not.exist(withdrawal(testData));
+  });
+
+})
+
+describe('withdrawal', function() {
+
+  withdrawal = cascade.__get__('withdrawal');
+
+  it('should return kachunk with valid message', function() {
+    var testData = {"user": "tylercrumpton", "amount": 0.50};
+    withdrawal(testData).should.equal('KACHUNK!');
+  });
+
+  it('should return null with invalid message', function() {
+    var testData = {"amount": 0.50};
+    should.not.exist(withdrawal(testData));
+  });
+
 })
