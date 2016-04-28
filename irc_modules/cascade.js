@@ -1,4 +1,3 @@
-var util      = require('util');
 var log       = require('logule').init(module, 'cascade.js');
 var validator = require('is-my-json-valid');
 
@@ -44,10 +43,10 @@ function bank(data){
   }
   else {
     if (data.funds === 5.00){
-      message = util.format('KACHUNK! - CasCADE machine funds approaching low levels.');
+      message = 'KACHUNK! - CasCADE machine funds approaching low levels.';
     }
     else if (data.funds === 1.50){
-      message = util.format('KACHUNK! - CasCADE machine funds at critically low levels.');
+      message = 'KACHUNK! - CasCADE machine funds at critically low levels.';
     }
     return message;
   }
