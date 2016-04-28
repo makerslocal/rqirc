@@ -2,6 +2,10 @@ var should = require('chai').should();
 var rewire = require('rewire');
 var alert = rewire('../irc_modules/wiki');
 
+log = alert.__get__('log');
+log.unmuteOnly(); // unmuteOnly nothing === mute everything
+
+
 describe('mkMessage', function() {
 
   mkMessage = alert.__get__('mkMessage');

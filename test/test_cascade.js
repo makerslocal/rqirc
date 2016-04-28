@@ -2,6 +2,9 @@ var should = require('chai').should();
 var rewire = require('rewire');
 var cascade = rewire('../irc_modules/cascade');
 
+log = cascade.__get__('log');
+log.unmuteOnly(); // unmuteOnly nothing === mute everything
+
 describe('bank', function() {
 
   bank = cascade.__get__('bank');
