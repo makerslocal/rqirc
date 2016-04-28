@@ -11,10 +11,13 @@
     "logule": "^2.0.1",
     "mqtt": "^1.7.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "rewire": "^2.5.1"
+  },
   "scripts": {
     "start": "node index.js $PWD/config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "GPL"
