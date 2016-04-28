@@ -1,7 +1,6 @@
 var should = require('chai').should();
 var rewire = require('rewire');
 var cascade = rewire('../irc_modules/cascade');
-var util = require('util');
 
 describe('bank', function() {
 
@@ -9,12 +8,12 @@ describe('bank', function() {
 
   it('should return low level at five', function() {
     var testData = {funds: 5.0};
-    bank(testData).should.equal(util.format('KACHUNK! - CasCADE machine funds approaching low levels.'));
+    bank(testData).should.equal('KACHUNK! - CasCADE machine funds approaching low levels.');
   });
 
   it('should return critically low at one fifty', function() {
     var testData = {funds: 1.50};
-    bank(testData).should.equal(util.format('KACHUNK! - CasCADE machine funds at critically low levels.'));
+    bank(testData).should.equal('KACHUNK! - CasCADE machine funds at critically low levels.');
   });
 
   it('should return null at higher than five', function() {
@@ -31,4 +30,26 @@ describe('bank', function() {
     var testData = {funds: 1.0};
     should.not.exist(bank(testData));
   });
+
+  it('should return null with invalid message', function() {
+    var testData = {"amount": 0.50};
+    should.not.exist(withdrawal(testData));
+  });
+
+})
+
+describe('withdrawal', function() {
+
+  withdrawal = cascade.__get__('withdrawal');
+
+  it('should return kachunk with valid message', function() {
+    var testData = {"user": "tylercrumpton", "amount": 0.50};
+    withdrawal(testData).should.equal('KACHUNK!');
+  });
+
+  it('should return null with invalid message', function() {
+    var testData = {"amount": 0.50};
+    should.not.exist(withdrawal(testData));
+  });
+
 })

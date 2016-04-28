@@ -17,7 +17,7 @@ var validate = validator({
 // Take the data from wiki2mqtt and create a string to use with irc.
 function mkMessage(data){
   var summary = util.format('wiki page [[%s]] by %s', data.title, data.user);
-  if (data.comment !== null) {
+  if (data.hasOwnProperty("comment")) {
     summary = util.format('%s ("%s")', summary, data.comment);
   }
   if (data.type === "edit") {
