@@ -9,12 +9,12 @@ describe('bank', function() {
 
   it('should return low level at five', function() {
     var testData = {funds: 5.0};
-    bank(testData).should.equal(util.format('KACHUNK! - CasCADE machine funds approaching low levels.'));
+    bank(testData).should.equal('KACHUNK! - CasCADE machine funds approaching low levels.');
   });
 
   it('should return critically low at one fifty', function() {
     var testData = {funds: 1.50};
-    bank(testData).should.equal(util.format('KACHUNK! - CasCADE machine funds at critically low levels.'));
+    bank(testData).should.equal('KACHUNK! - CasCADE machine funds at critically low levels.');
   });
 
   it('should return null at higher than five', function() {
