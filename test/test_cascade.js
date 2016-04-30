@@ -5,18 +5,18 @@ var cascade = rewire('../irc_modules/cascade');
 log = cascade.__get__('log');
 log.unmuteOnly(); // unmuteOnly nothing === mute everything
 
-describe('bank', function() {
+describe('cascade.bank', function() {
 
   bank = cascade.__get__('bank');
 
   it('should return low level at five', function() {
     var testData = {funds: 5.0};
-    bank(testData).should.equal('KACHUNK! - CasCADE machine funds approaching low levels.');
+    bank(testData).should.equal('CasCADE machine funds approaching low levels.');
   });
 
   it('should return critically low at one fifty', function() {
     var testData = {funds: 1.50};
-    bank(testData).should.equal('KACHUNK! - CasCADE machine funds at critically low levels.');
+    bank(testData).should.equal('CasCADE machine funds at critically low levels.');
   });
 
   it('should return null at higher than five', function() {
@@ -39,9 +39,9 @@ describe('bank', function() {
     should.not.exist(withdrawal(testData));
   });
 
-})
+});
 
-describe('withdrawal', function() {
+describe('cascade.withdrawal', function() {
 
   withdrawal = cascade.__get__('withdrawal');
 
@@ -55,4 +55,4 @@ describe('withdrawal', function() {
     should.not.exist(withdrawal(testData));
   });
 
-})
+});

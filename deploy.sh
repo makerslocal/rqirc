@@ -13,5 +13,5 @@ else
 fi
 
 docker rm -f $name
-docker pull itsamenathan/$name
-docker run -d --restart=always --name="$name" -e NODE_CONFIG="$NODE_CONFIG" itsamenathan/$name
+docker pull makerslocal/$name
+docker run -d --restart=always --name="$name" -e NODE_CONFIG="$NODE_CONFIG" makerslocal/$name
