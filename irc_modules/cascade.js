@@ -43,10 +43,10 @@ function bank(data){
   }
   else {
     if (data.funds === 5.00){
-      message = 'KACHUNK! - CasCADE machine funds approaching low levels.';
+      message = 'CasCADE machine funds approaching low levels.';
     }
     else if (data.funds === 1.50){
-      message = 'KACHUNK! - CasCADE machine funds at critically low levels.';
+      message = 'CasCADE machine funds at critically low levels.';
     }
     return message;
   }
@@ -70,7 +70,7 @@ module.exports = function(irc, mqtt) {
     }
 
     // Make sure we got a valid message
-    if ( message !== null){
+    if ( message ){
       log.info(message);
       irc.send('#makerslocal', message, false);
     }
