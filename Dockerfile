@@ -1,4 +1,4 @@
-FROM node:4
+FROM node:4-slim
 
 COPY . /rqirc
 RUN cd /rqirc && npm install

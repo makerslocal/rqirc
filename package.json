@@ -9,6 +9,7 @@
     "internet-relay-chat": "^1.1.6",
     "is-my-json-valid": "^2.13.1",
     "logule": "^2.0.1",
+    "moment-timezone": "^0.5.4",
     "mqtt": "^1.7.4"
   },
   "devDependencies": {
