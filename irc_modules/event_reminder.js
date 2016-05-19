@@ -17,10 +17,12 @@ var log    = require('logule').init(module, 'event_reminder.js');
 //   }
 
 module.exports = function(irc, mqtt) {
+  log.info('module loaded');
   // subscribe to mqtt topic
   mqtt.subscribe('ml256/event/reminder');
 
   mqtt.mqevent.on('ml256/event/reminder', function(data){
+    log.info(data);
     var eventStart = moment.tz(data.start, 'America/Chicago');
 
     var message = util.format('Remember: %s is happening %s', data.summary, eventStart.calendar());
