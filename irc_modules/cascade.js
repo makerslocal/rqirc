@@ -54,6 +54,7 @@ function bank(data){
 
 
 module.exports = function(irc, mqtt) {
+  log.info('module loaded');
   // subscribe to all cascade messages
   mqtt.subscribe('ml256/cascade/#');
 

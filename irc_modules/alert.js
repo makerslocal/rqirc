@@ -15,6 +15,7 @@ var validate = validator({
 });
 
 module.exports = function(irc, mqtt) {
+  log.info('module loaded');
   // subscribe to mqtt topic
   mqtt.subscribe('ml256/bigsign/alert');
 

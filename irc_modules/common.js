@@ -5,4 +5,5 @@ module.exports = function(irc, mqtt) {
   require('./wiki.js')(irc, mqtt);
   require('./alert.js')(irc, mqtt);
   require('./cascade.js')(irc, mqtt);
+  require('./event_reminder.js')(irc, mqtt);
 };
