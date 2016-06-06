@@ -10,7 +10,8 @@
     "is-my-json-valid": "^2.13.1",
     "logule": "^2.0.1",
     "moment-timezone": "^0.5.4",
-    "mqtt": "^1.7.4"
+    "mqtt": "^1.7.4",
+    "validator": "^5.3.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
