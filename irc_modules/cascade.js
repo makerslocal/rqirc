@@ -1,3 +1,4 @@
+var util      = require('util');
 var log       = require('logule').init(module, 'cascade.js');
 var validator = require('is-my-json-valid');
 
@@ -61,6 +62,8 @@ module.exports = function(irc, mqtt) {
   // Lets do things on events
   mqtt.mqevent.on('ml256/cascade/*', function(data){
     var message;
+
+    irc.debugSend(util.format('%s %j', this.event, data));
 
     // Test what event is called
     if (this.event === 'ml256/cascade/bank'){

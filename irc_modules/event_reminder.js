@@ -22,6 +22,9 @@ module.exports = function(irc, mqtt) {
   mqtt.subscribe('ml256/event/reminder');
 
   mqtt.mqevent.on('ml256/event/reminder', function(data){
+
+    irc.debugSend(util.format('%s %j', this.event, data));
+
     log.info(data);
     var eventStart = moment.tz(data.start, 'America/Chicago');
 

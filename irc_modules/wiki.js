@@ -42,6 +42,9 @@ module.exports = function(irc, mqtt) {
 
   // Uses EventEmitter2 for events, can use wildcards.
   mqtt.mqevent.on('ml256/wiki/change', function(data){
+
+    irc.debugSend(util.format('%s %j', this.event, data));
+
     // Ignore minor changes
     if (data.hasOwnProperty('minor')) {
       log.warn('minor change');
