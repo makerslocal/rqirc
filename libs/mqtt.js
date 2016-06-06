@@ -5,6 +5,7 @@
 var mqtt = require('mqtt');
 var log = require('logule').init(module, 'mqtt');
 var EventEmitter = require('eventemitter2').EventEmitter2;
+var subTopic = [];
 
 module.exports = Mqtt;
 
@@ -21,6 +22,7 @@ function Mqtt(cfg) {
 
   this.client.on('connect', function () {
     log.info("Connected");
+    self.client.subscribe(subTopic);
   });
 
   this.client.on('message', function (topic, payload) {
@@ -32,6 +34,7 @@ function Mqtt(cfg) {
 // subscribe to topic passed in
 Mqtt.prototype.subscribe = function(topic){
   this.client.subscribe(topic);
+  subTopic.push(topic);
 };
 
 // publish mqtt message
