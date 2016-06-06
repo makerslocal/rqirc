@@ -3,6 +3,7 @@
  */
 
 var mqtt = require('mqtt');
+var validator = require('validator');
 var log = require('logule').init(module, 'mqtt');
 var EventEmitter = require('eventemitter2').EventEmitter2;
 var subTopic = [];
@@ -26,8 +27,13 @@ function Mqtt(cfg) {
   });
 
   this.client.on('message', function (topic, payload) {
-    log.info("mqtt message -> %s", topic, payload.toString());
-    self.mqevent.emit(topic, JSON.parse(payload.toString()));
+    var msg = payload.toString();
+    log.info("mqtt message -> %s", topic, msg);
+    if (validator.isJSON(msg)){
+      self.mqevent.emit(topic, JSON.parse(msg));
+    } else {
+      log.error('not valid json');
+    }
   });
 }
 
