@@ -6,9 +6,9 @@
     },
 
     "connection" : {
-      "username"      : "rqirc",
+      "username"      : "RedQueen256",
       "realname"      : "RedQueen Irc Bot",
-      "nick"          : "rqirc",
+      "nick"          : "RedQueen256",
       "server"        : "irc.freenode.net",
       "port"          : 6697,
       "autoReconnect" : 15000,

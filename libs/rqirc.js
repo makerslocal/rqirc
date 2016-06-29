@@ -27,7 +27,4 @@ irc.rqevent.on('*', function(msg){
 
   // send mqtt message
   mqtt.send(topic, message);
-
-  // send copy of message to irc debug chan
-  irc.debugSend(util.format('%s %s', topic, message));
 });
