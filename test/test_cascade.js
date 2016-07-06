@@ -2,12 +2,13 @@ var should = require('chai').should();
 var rewire = require('rewire');
 var cascade = rewire('../irc_modules/cascade');
 
-log = cascade.__get__('log');
+var log = cascade.__get__('log');
 log.unmuteOnly(); // unmuteOnly nothing === mute everything
 
 describe('cascade.bank', function() {
 
-  bank = cascade.__get__('bank');
+  var bank = cascade.__get__('bank');
+  var withdrawal = cascade.__get__('withdrawal');
 
   it('should return low level at five', function() {
     var testData = {funds: 5.0};
@@ -43,7 +44,7 @@ describe('cascade.bank', function() {
 
 describe('cascade.withdrawal', function() {
 
-  withdrawal = cascade.__get__('withdrawal');
+  var withdrawal = cascade.__get__('withdrawal');
 
   it('should return kachunk with valid message', function() {
     var testData = {"user": "tylercrumpton", "amount": 0.50};
