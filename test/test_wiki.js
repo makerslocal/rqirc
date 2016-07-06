@@ -1,14 +1,14 @@
 var should = require('chai').should();
 var rewire = require('rewire');
-var alert = rewire('../irc_modules/wiki');
+var wiki = rewire('../irc_modules/wiki');
 
-log = alert.__get__('log');
+var log = wiki.__get__('log');
 log.unmuteOnly(); // unmuteOnly nothing === mute everything
 
 
-describe('mkMessage', function() {
+describe('wiki.mkMessage', function() {
 
-  mkMessage = alert.__get__('mkMessage');
+  var mkMessage = wiki.__get__('mkMessage');
 
   it('should generate alteration message on wiki edit with comment', function() {
     var testData = {type: "edit", title: "Wiki Page Name", user: "tylercrumpton", revid: "1337", pageid: "12", comment: "fixed thing"};
