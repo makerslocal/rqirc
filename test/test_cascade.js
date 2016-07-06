@@ -8,7 +8,6 @@ log.unmuteOnly(); // unmuteOnly nothing === mute everything
 describe('cascade.bank', function() {
 
   var bank = cascade.__get__('bank');
-  var withdrawal = cascade.__get__('withdrawal');
 
   it('should return low level at five', function() {
     var testData = {funds: 5.0};
@@ -37,7 +36,7 @@ describe('cascade.bank', function() {
 
   it('should return null with invalid message', function() {
     var testData = {"amount": 0.50};
-    should.not.exist(withdrawal(testData));
+    should.not.exist(bank(testData));
   });
 
 });
