@@ -16,19 +16,24 @@ var log    = require('logule').init(module, 'event_reminder.js');
 //   "msg": "week"
 //   }
 
+function mkMessage(data){
+  var eventStart = moment.tz(data.start, 'America/Chicago');
+  return util.format('Remember: %s is happening %s %s', data.summary, eventStart.calendar(), data.url);
+}
+
 module.exports = function(irc, mqtt) {
   log.info('module loaded');
+
   // subscribe to mqtt topic
   mqtt.subscribe('ml256/event/reminder');
 
   mqtt.mqevent.on('ml256/event/reminder', function(data){
 
+    log.info(data);
+
     irc.debugSend(util.format('%s %j', this.event, data));
 
-    log.info(data);
-    var eventStart = moment.tz(data.start, 'America/Chicago');
-
-    var message = util.format('Remember: %s is happening %s', data.summary, eventStart.calendar());
+    var message = mkMessage(data);
     log.info(message);
     irc.send('#makerslocal', message, false);
   });
