@@ -2,6 +2,7 @@ var util = require('util');
 var log  = require('logule').init(module, 'irc');
 var irc  = require('internet-relay-chat');
 var EventEmitter = require('eventemitter2').EventEmitter2;
+var gitHead = require('git-head');
 
 function Irc(cfg) {
   // Public
@@ -16,6 +17,16 @@ function Irc(cfg) {
 
   // Private
   var self = this;
+
+  function gitHash(){
+    gitHead('.git', function (err, hash) {
+      if (err) return console.log(err)
+      var trunk = hash.substring(0, 7);
+      var msg = util.format('Version %s - https://github.com/makerslocal/rqirc/commit/%s', trunk, trunk);
+      log.info('Version Hash: %s', trunk);
+      self.debugSend(msg);
+    })
+  }
 
   // print log info on connected
   this.client.on('connect', function() {
@@ -34,6 +45,9 @@ function Irc(cfg) {
   // add channel to array on join
   this.client.on('join', function (user, channel) {
     log.info("JOIN: %s %s", user.nick, channel);
+    if (channel === self.config.bot.debugchan){
+      gitHash();
+    }
   });
 
   // remove channel for array on part
