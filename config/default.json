@@ -31,6 +31,10 @@
     "username"   : "username",
     "password"   : "password"
 
+  },
+
+  "rss" : {
+    "feed"  : "https://256.makerslocal.org/feed/"
   }
 
 }
