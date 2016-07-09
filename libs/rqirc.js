@@ -13,7 +13,7 @@ var irc     = new Irc(config.irc);
 
 // Setup reading rss feed
 var Rss     = require('./rss.js');
-var rss     = new Irc(mqtt, config.rss);
+var rss     = new Rss(mqtt, config.rss);
 
 require('../irc_modules/common.js')(irc, mqtt);
 
