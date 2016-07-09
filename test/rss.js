@@ -1,5 +1,4 @@
 var should = require('chai').should();
-var expect = require('chai').expect();
 var rewire = require('rewire');
 var rss = rewire('../irc_modules/rss');
 
