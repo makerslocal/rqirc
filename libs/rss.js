@@ -5,7 +5,7 @@ module.exports = Rss;
 
 function Rss(mqtt, cfg) {
   log.info("starting RSS watcher");
-  this.watcher = new Watcher(cfg.feed)
+  this.watcher = new Watcher(cfg.feed, 600)
   this.watcher.start();
 
   this.watcher.on('new entries', function(entries) {
