@@ -45,7 +45,7 @@ function Irc(cfg) {
   // add channel to array on join
   this.client.on('join', function (user, channel) {
     log.info("JOIN: %s %s", user.nick, channel);
-    if (channel === self.config.bot.debugchan){
+    if (channel === self.config.bot.debugchan && user.nick === self.nick){
       gitHash();
     }
   });
