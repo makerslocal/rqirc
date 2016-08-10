@@ -1,13 +1,13 @@
-var util      = require('util');
-var log       = require('logule').init(module, 'cascade.js');
+var util = require('util');
+var log = require('logule').init(module, 'cascade.js');
 var validator = require('is-my-json-valid');
 
 // Define our json-schemas
 var validateWithdrawal = validator({
-  type : 'object',
-  properties : {
-    user   : {type: 'string', required: true},
-    amount : {type: 'number', required: true},
+  type: 'object',
+  properties: {
+    user: {type: 'string', required: true},
+    amount: {type: 'number', required: true},
   }
 });
 

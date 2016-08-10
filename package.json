@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "config": "^1.14.0",
+    "eslint": "^3.2.2",
     "eventemitter2": "^1.0.0",
     "feed-watcher": "^0.2.1",
     "git-head": "^1.14.0",
@@ -17,11 +18,14 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "eslint": "^3.2.2",
+    "eslint-config-google": "^0.6.0",
     "mocha": "^2.4.5",
     "rewire": "^2.5.1"
   },
   "scripts": {
     "start": "node index.js $PWD/config.js",
+    "pretest": "eslint .",
     "test": "mocha"
   },
   "author": "",
