@@ -7,14 +7,14 @@ var validateWithdrawal = validator({
   type: 'object',
   properties: {
     user: {type: 'string', required: true},
-    amount: {type: 'number', required: true},
+    amount: {type: 'number', required: true}
   }
 });
 
 var validateBank = validator({
-  type : 'object',
-  properties : {
-    funds : {type: 'number', required: true},
+  type: 'object',
+  properties: {
+    funds: {type: 'number', required: true}
   }
 });
 
@@ -23,13 +23,11 @@ var validateBank = validator({
 //
 // Set message for every withdrawal
 //
-function withdrawal(data){
-  if (!validateWithdrawal(data)){
-    log.error('withdrawal message not vaild');
-  }
-  else {
+function withdrawal(data) {
+  if (validateWithdrawal(data)) {
     return 'KACHUNK!';
   }
+  log.error('withdrawal message not valid');
 }
 
 // example message:
@@ -37,22 +35,18 @@ function withdrawal(data){
 //
 // Set message for special withdrawal events.
 //
-function bank(data){
+function bank(data) {
   var message;
-  if (!validateBank(data)){
-    log.error('bank message not vaild');
-  }
-  else {
-    if (data.funds === 5.00){
+  if (validateBank(data)) {
+    if (data.funds === 5.00) {
       message = 'CasCADE machine funds approaching low levels.';
-    }
-    else if (data.funds === 1.50){
+    } else if (data.funds === 1.50) {
       message = 'CasCADE machine funds at critically low levels.';
     }
     return message;
   }
+  log.error('bank message not valid');
 }
-
 
 module.exports = function(irc, mqtt) {
   log.info('module loaded');
@@ -60,23 +54,22 @@ module.exports = function(irc, mqtt) {
   mqtt.subscribe('ml256/cascade/#');
 
   // Lets do things on events
-  mqtt.mqevent.on('ml256/cascade/*', function(data){
+  mqtt.mqevent.on('ml256/cascade/*', function(data) {
     var message;
 
     irc.debugSend(util.format('%s %j', this.event, data));
 
     // Test what event is called
-    if (this.event === 'ml256/cascade/bank'){
+    if (this.event === 'ml256/cascade/bank') {
       message = bank(data);
-    }
-    else if (this.event === 'ml256/cascade/withdrawal'){
+    } else if (this.event === 'ml256/cascade/withdrawal') {
       message = withdrawal(data);
     }
 
     // Make sure we got a valid message
-    if ( message ){
+    if (message) {
       log.info(message);
       irc.send('#makerslocal', message, false);
     }
   });
- };
+};
