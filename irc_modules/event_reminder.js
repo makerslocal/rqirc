@@ -1,6 +1,6 @@
-var util   = require('util');
+var util = require('util');
 var moment = require('moment-timezone');
-var log    = require('logule').init(module, 'event_reminder.js');
+var log = require('logule').init(module, 'event_reminder.js');
 
 // example:
 //  ml256/event/reminder
@@ -16,7 +16,7 @@ var log    = require('logule').init(module, 'event_reminder.js');
 //   "msg": "week"
 //   }
 
-function mkMessage(data){
+function mkMessage(data) {
   var eventStart = moment.tz(data.start, 'America/Chicago');
   return util.format('Remember: %s is happening %s %s', data.summary, eventStart.calendar(), data.url);
 }
@@ -27,8 +27,7 @@ module.exports = function(irc, mqtt) {
   // subscribe to mqtt topic
   mqtt.subscribe('ml256/event/reminder');
 
-  mqtt.mqevent.on('ml256/event/reminder', function(data){
-
+  mqtt.mqevent.on('ml256/event/reminder', function(data) {
     log.info(data);
 
     irc.debugSend(util.format('%s %j', this.event, data));

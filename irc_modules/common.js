@@ -1,4 +1,4 @@
-var log  = require('logule').init(module, 'irc_modules');
+var log = require('logule').init(module, 'irc_modules');
 module.exports = function(irc, mqtt) {
   log.info('loading irc modules');
   require('./echo.js')(irc, mqtt);
