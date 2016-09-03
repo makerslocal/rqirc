@@ -25,6 +25,15 @@ function irc(cfg) {
     });
   }
 
+  this.connected = function () {
+    if (typeof this.client.channels === "undefined"){
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
   // print log info on connected
   this.client.on('connect', function() {
     log.info('Connected');
@@ -85,9 +94,14 @@ function irc(cfg) {
 }
 
 irc.prototype.send = function(to, msg, actionable) {
+  if (!this.connected()){
+    log.error("No Channels");
+    return;
+  }
   // if not in channel and is a channel, throw error
   if (!this.client.channels.hasOwnProperty(to) && /^#/.test(to)) {
-    throw new Error("Message not sent, not connected to channel");
+    log.error("Message not sent, not connected to channel");
+    return;
   }
   log.info('sending to irc : %s - %s', to, msg);
   if (actionable) {
@@ -97,9 +111,20 @@ irc.prototype.send = function(to, msg, actionable) {
   }
 };
 
+<<<<<<< HEAD
 irc.prototype.debugSend = function(msg) {
   if (!this.client.channels.hasOwnProperty(this.config.bot.debugchan)) {
     throw new Error("Message not sent, not connected to channel");
+=======
+Irc.prototype.debugSend = function(msg) {
+  if ( !this.connected()){
+    log.error("No Channels");
+    return;
+  }
+  if ( !this.client.channels.hasOwnProperty(this.config.bot.debugchan) ) {
+    log.error("Message not sent, not connected to channel");
+    return;
+>>>>>>> master
   }
   log.info('debug msg: %s', msg);
   this.client.message(this.config.bot.debugchan, msg);
