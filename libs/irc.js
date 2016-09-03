@@ -25,14 +25,12 @@ function irc(cfg) {
     });
   }
 
-  this.connected = function () {
-    if (typeof this.client.channels === "undefined"){
+  this.connected = function() {
+    if (typeof this.client.channels === "undefined") {
       return false;
     }
-    else {
-      return true;
-    }
-  }
+    return true;
+  };
 
   // print log info on connected
   this.client.on('connect', function() {
@@ -94,7 +92,7 @@ function irc(cfg) {
 }
 
 irc.prototype.send = function(to, msg, actionable) {
-  if (!this.connected()){
+  if (!this.connected()) {
     log.error("No Channels");
     return;
   }
