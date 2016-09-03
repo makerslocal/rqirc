@@ -111,20 +111,14 @@ irc.prototype.send = function(to, msg, actionable) {
   }
 };
 
-<<<<<<< HEAD
 irc.prototype.debugSend = function(msg) {
-  if (!this.client.channels.hasOwnProperty(this.config.bot.debugchan)) {
-    throw new Error("Message not sent, not connected to channel");
-=======
-Irc.prototype.debugSend = function(msg) {
-  if ( !this.connected()){
+  if (!this.connected()) {
     log.error("No Channels");
     return;
   }
-  if ( !this.client.channels.hasOwnProperty(this.config.bot.debugchan) ) {
+  if (!this.client.channels.hasOwnProperty(this.config.bot.debugchan)) {
     log.error("Message not sent, not connected to channel");
     return;
->>>>>>> master
   }
   log.info('debug msg: %s', msg);
   this.client.message(this.config.bot.debugchan, msg);
