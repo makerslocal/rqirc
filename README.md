@@ -31,8 +31,8 @@ rqirc is a irc gateway for the [RedQueen](https://256.makerslocal.org/wiki/RQ) n
 
 ### Plugins
 * go in `irc_modules` directory
-* subscript to events on mqtt
-** messages are received in a formate the mqtt publisher decides.
+* subscribed to events on mqtt
+  * messages are received in a format the mqtt publisher decides.
 
 ## Software
 * [config](https://github.com/lorenwest/node-config) - config management
